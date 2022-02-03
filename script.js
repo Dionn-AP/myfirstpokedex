@@ -1,4 +1,6 @@
 const inputPokemon = document.querySelector('#pokemon');
+const lightPowerLeft = document.querySelector('.bow-left');
+const lighttPowerRight = document.querySelector('.bow-right');
 const namePokemon = document.querySelector('.name-pokemon #name');
 const habPokemon = document.querySelector('.name-pokemon #hab');
 const imagePokemon = document.querySelector('.image-pokemon img');
@@ -25,7 +27,7 @@ const arrayPokemons = [
     "Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto",
     "Pidgeot","Rattata","Raticate","Spearow","Fearow",
     "Ekans","Arbok","Pikachu","Raichu","Sandshrew",
-    "Sandslash","Nidoran","Nidorina","Nidoqueen",
+    "Sandslash","Nidorina","Nidoqueen",
     "Nidoran","Nidorino","Nidoking","Clefairy",
     "Clefable","Vulpix","Ninetales","Jigglypuff",
     "Wigglytuff","Zubat","Golbat","Oddish","Gloom",
@@ -52,12 +54,24 @@ const arrayPokemons = [
 ];
 
 btnClk.addEventListener('click', () => {
+    if (inputPokemon.value === '') return;
+
+    let lowerinput = inputPokemon.value.toLowerCase();
+
+    const containPokemon = arrayPokemons.find((pokemonsSearch) => {
+        return lowerinput === pokemonsSearch.toLowerCase()
+    });
+    if (lowerinput !== containPokemon.toLowerCase()) return;
+
     namePokemon.classList.remove('escondido');
     habPokemon.classList.remove('escondido');
     imagePokemon.classList.remove('escondido');
     listaPokemon.classList.add('escondido')
     imageLogo.classList.add('escondido');
-    const promiseResposta = fetch(`https://pokeapi.co/api/v2/pokemon/${inputPokemon.value}`);
+    lightPowerLeft.classList.remove('escondido');
+    lighttPowerRight.classList.remove('escondido');
+
+    const promiseResposta = fetch(`https://pokeapi.co/api/v2/pokemon/${lowerinput}`);
 
     promiseResposta.then((resposta) => {
         const promiseBody = resposta.json();
@@ -96,8 +110,9 @@ const up = (index) => {
 btnUp.addEventListener('click', () => {
     indexLista--
     if (indexLista < 0) {
-        return
+        return indexLista = 0
     }
+    console.log(indexLista)
     up(indexLista)
 });
 
@@ -109,10 +124,11 @@ const down = (index) => {
 
 btnDown.addEventListener('click', () => {
     indexLista++
-    if (indexLista == 151) {
-        return
+    if (indexLista > 149) {
+        return indexLista = 149
     }
     down(indexLista)
+    console.log(indexLista)
 });
 
 btnClear.addEventListener('click', () => {
@@ -121,6 +137,8 @@ btnClear.addEventListener('click', () => {
     imagePokemon.classList.add('escondido');
     listaPokemon.classList.add('escondido');
     imageLogo.classList.remove('escondido');
+    lightPowerLeft.classList.add('escondido');
+    lighttPowerRight.classList.add('escondido');
     inputPokemon.value = ''
 });
 
