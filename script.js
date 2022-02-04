@@ -53,6 +53,10 @@ const arrayPokemons = [
     "Dragonair","Dragonite","Mewtwo","Mew"
 ];
 
+for (let i = 0; i < arrayPokemons.length; i++) {
+    listaPokemon.options[listaPokemon.options.length] = new Option(arrayPokemons[i],`${i}`)
+}
+
 btnClk.addEventListener('click', () => {
     if (inputPokemon.value === '') return;
 
@@ -90,9 +94,7 @@ btnLista.addEventListener('click', () => {
     imagePokemon.classList.add('escondido');
     imageLogo.classList.add('escondido');
     listaPokemon.classList.remove('escondido');
-    for (let i = 0; i < arrayPokemons.length; i++) {
-        listaPokemon.options[listaPokemon.options.length] = new Option(arrayPokemons[i],`${i}`)
-    }
+    
 });
 
 listaPokemon.addEventListener('change', () => {
