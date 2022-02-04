@@ -112,7 +112,7 @@ btnUp.addEventListener('click', () => {
     if (indexLista < 0) {
         return indexLista = 0
     }
-    console.log(indexLista)
+    
     up(indexLista)
 });
 
@@ -128,7 +128,6 @@ btnDown.addEventListener('click', () => {
         return indexLista = 149
     }
     down(indexLista)
-    console.log(indexLista)
 });
 
 btnClear.addEventListener('click', () => {
